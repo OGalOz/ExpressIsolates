@@ -198,6 +198,7 @@ def main():
         complete_preparation_for_isolates_website(qzv_fp)
     elif args[-1] == "2":
         Qiime2_HTML_dir = args[1]
+        check_this_is_correct_directory()
         data_name = prepare_index_HTML_file_for_ExpressJS(Qiime2_HTML_dir)
         op_dir = move_files_to_correct_location(Qiime2_HTML_dir, data_name)
         logging.info("Moved files to " + op_dir)
