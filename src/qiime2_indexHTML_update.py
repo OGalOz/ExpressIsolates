@@ -39,8 +39,11 @@ def complete_preparation_for_isolates_website(qzv_fp):
     prepare_index_HTML_file_for_ExpressJS(HTML_dir, data_name)
     op_dir = move_files_to_correct_location(HTML_dir, data_name)
     logging.info("Moved files to " + op_dir)
+    remove_existing_HTML_dir(HTML_dir)
     sys.exit(0)
 
+def remove_existing_HTML_dir(HTML_dir):
+    os.rmdir(HTML_dir)
 
 
 def check_this_is_correct_directory():
