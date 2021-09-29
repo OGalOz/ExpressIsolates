@@ -2,6 +2,9 @@ var express = require('express');
 var fs = require('fs');
 var router = express.Router();
 var qzv_data_base = '/data/QZVs'
+var process = require("process");
+//import process from 'process';
+const readline = require('readline');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -127,6 +130,48 @@ router.get('/data/JSONP/level-7.jsonp', function(req, res, next) {
 });
 
 /* End QIIME2 Values */
+
+
+/*
+ * Testing parsing within router
+ */
+
+async function processLineByLine(num_lines, fp) {
+  const fileStream = fs.createReadStream(fp);
+
+  const rl = readline.createInterface({
+    input: fileStream,
+    crlfDelay: Infinity
+  });
+  // Note: we use the crlfDelay option to recognize all instances of CR LF
+  // ('\r\n') in input.txt as a single line break.
+  let crt_line = 0;
+  for await (const line of rl) {
+    // Each line in input.txt will be successively available here as `line`.
+    console.log(`Line from file: ${line}`);
+    crt_line += 1;
+    if (crt_line == num_lines) {
+        return "stop";
+    }
+  }
+}
+
+
+router.get('/test_parse', function(req, res, next) {
+
+    let fp = "./data/testing/table-with-taxonomy.tsv";
+    if (fs.existsSync(fp)) {
+        processLineByLine(10, fp);
+        res.send(process.cwd());
+    } else {
+        res.send("Not found");
+    }
+
+});
+
+
+
+
 
 
 router.get('/xx/yy', function(req, res, next) {
