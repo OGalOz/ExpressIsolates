@@ -1,0 +1,4 @@
+localhost:3000
+
+/data/QZVs/Spring2019-20190618-taxa-bar-plots-rename_HTML/index.html
+/data/QZVs/Spring2019-20190717-taxa-bar-plots-rename_HTML/index.html

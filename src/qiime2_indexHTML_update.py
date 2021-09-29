@@ -36,7 +36,7 @@ def complete_preparation_for_isolates_website(qzv_fp):
         raise Exception("Input file to this script must end with '.qzv'")
     data_name = get_data_name(qzv_fp)
     HTML_dir = call_qiime_tools(qzv_fp, data_name)
-    prepare_index_HTML_file_for_ExpressJS(HTML_dir)
+    prepare_index_HTML_file_for_ExpressJS(HTML_dir, data_name)
     op_dir = move_files_to_correct_location(HTML_dir, data_name)
     logging.info("Moved files to " + op_dir)
     sys.exit(0)
@@ -109,9 +109,11 @@ def call_qiime_tools(qzv_fp, data_name):
 
 
 
-def prepare_index_HTML_file_for_ExpressJS(HTML_dir, server_type=1):
+def prepare_index_HTML_file_for_ExpressJS(HTML_dir, data_name, server_type=1):
     """
     Args:
+        
+        data_name (str): Name of eventual dir and data
         server_type (int) : 1 or 2. 1 means localhost:3000, 2 means
                             some specific location
     Description:
@@ -125,7 +127,7 @@ def prepare_index_HTML_file_for_ExpressJS(HTML_dir, server_type=1):
 
     # Example dirname: Spring2019-20190615-taxa-bar-plots-rename_HTML
     logging.debug("Input dir: " + HTML_dir)
-    data_name = os.path.basename(HTML_dir)
+    #data_name = os.path.basename(HTML_dir)
     logging.debug("Acquired data name: " + data_name)
     index_fp = os.path.join(HTML_dir, "index.html")
 

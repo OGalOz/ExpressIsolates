@@ -1,5 +1,7 @@
 var express = require('express');
+var fs = require('fs');
 var router = express.Router();
+var qzv_data_base = '/data/QZVs'
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -14,31 +16,34 @@ router.get('/data/QZVs/:data(*)/:filename(*)', function(req, res, next) {
 });
 */
 
-const possible_data_names = ["Spring2019-20190618-taxa-bar-plots-rename_HTML"]
 
 /* Catching QZV file data */
-router.get('/data/QZVs/:dataname(*)/:basefile(*)', function(req, res, next) {
-    dataname = req.params.dataname
-    if (!(possible_data_names.includes(dataname))) {
-        res.status(400).send("Data " + dataname + " not recognized.")
-    }
-    basefile = req.params.basefile
-    x =  basefile.split(".")
-    if (x.length > 2) {
+router.get(qzv_data_base + '/:dataname(*)/:basefile(*)', function(req, res, next) {
+    let dataname = req.params.dataname
+    let basefile = req.params.basefile
+    let x =  basefile.split(".")
+    if (x.length != 2) {
         res.status(400).send("Incorrect basefile request for qzv files, "
                             + "must be of format 'x.y', instead " + basefile)
     }
-    filename = x[0]
-    filetype =  x[1]
+    let filename = x[0]
+    let filetype =  x[1]
     console.log(filetype)
-    filetype_options = ["csv", "jsonp", "html"]
+    let filetype_options = ["csv", "jsonp", "html"]
     if (!(filetype_options.includes(filetype)))  {
         res.status(400).send("Incorrect filetype for qzv files: " + filetype)
     } else {
         if (filetype == "html" & filename != "index"){
             res.status(400).send("Files ending with .html must be 'index.html', instead " + basefile)
         }
-        res.status(200).sendFile('data/QZVs/' + req.params.dataname + "/" + req.params.filename);
+        let file_loc = qzv_data_base + "/" + dataname + "/" + basefile
+        if (fs.existsSync("./" + file_loc)) {
+            //file exists
+            res.status(200).sendFile(file_loc);
+        } else {
+                res.status(400).send("Could not find any file at the location " + file_loc)
+        }
+        //res.status(200).sendFile('data/QZVs/' + req.params.dataname + "/" + req.params.filename);
     }
 });
 
