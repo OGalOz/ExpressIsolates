@@ -2,3 +2,7 @@
 data
 INFO.txt
 TD.txt
+js_src/table-with-taxonomy.tsv
+MYSQL_COMMANDS.txt
+MYSQL_INFO.txt
+tmp/*

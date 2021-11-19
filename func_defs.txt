@@ -1,0 +1,13 @@
+
+
+# Using python to create new QIIME2 webpages:
+# From within the central directory (the dir of
+# this file), use the python file py_src/qiime2_indexHTML_update.py
+# with the '1' option, first argument being the qzv file.
+
+
+# Using python to create sortable, filterable table:
+# Use the file py_src/convert_tsv_to_JS_table.py and
+# get an output JS file. Then use the file html_templates/table_index.html
+# with the script src pointing to the output from the script,
+# and open that file (table_index.html) in a browser.
