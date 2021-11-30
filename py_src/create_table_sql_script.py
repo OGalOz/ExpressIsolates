@@ -9,6 +9,21 @@ As inputs to the file, use
 input TSV file, config JSON, and output SQL file path.
 Make sure the output SQL file path isn't at a location
 where a file already exists.
+
+Config JSON file is a dict with keys:
+Example:
+{
+    "tbl_nm": "Spring_100well_nochloro_nomito2",
+    "col_nm2type_and_default": {
+        "Taxonomy": {"type": "VARCHAR(512)", "default": "NOT NULL", 
+            "base_type": "str"},
+        "ASV": {"type": "VARCHAR(512)", "default": "NOT NULL", 
+                "base_type": "str"}
+    },
+    "col_default": "NOT NULL",
+    "other_col_type": "DECIMAL(25,20)",
+    "primary_key_name": "ASV" 
+}
 '''
 
 
@@ -18,7 +33,7 @@ import pandas as pd
 import json
 import logging
 
-def prepare_create_table_sql_script(inp_TSV_fp, cfg_json_fp, op_sql_fp):
+def prepare_create_table_sql_script(inp_TSV_fp, cfg_json_fp, op_sql_fp, typ=1):
     '''
     Args:
         inp_TSV_fp: Path to TSV file to add as table to mysql db
@@ -29,10 +44,10 @@ def prepare_create_table_sql_script(inp_TSV_fp, cfg_json_fp, op_sql_fp):
     inp_df, inp_cfg = check_inputs(inp_TSV_fp, cfg_json_fp, op_sql_fp)
 
     # Each line will be placed as a string on this list
-    sql_op_lines = create_sql_lines_in_list(inp_df, inp_cfg)
+    sql_op_lines = create_sql_lines_in_list(inp_df, inp_cfg, typ=typ)
 
 
-def create_sql_lines_in_list(inp_df, inp_cfg):
+def create_sql_lines_in_list(inp_df, inp_cfg, typ=1):
 
 
     create_table_lines = add_create_table_statements(inp_df, inp_cfg)
@@ -42,7 +57,11 @@ def create_sql_lines_in_list(inp_df, inp_cfg):
         g.write("\n".join(create_table_lines))
         print("WROTE TO tmp/cre...")
 
-    insert_to_table_lines = create_insert_row_statements(inp_df,inp_cfg)
+    if typ == 1:
+        insert_to_table_lines = create_insert_row_statements_w_values(inp_df,inp_cfg)
+    else:
+        # typ = 2
+        insert_to_table_lines = create_insert_row_many(inp_df, inp_cfg)
 
 
     # TO OUTPUT INSERT INTO TABLE STATEMENT
@@ -55,8 +74,7 @@ def create_sql_lines_in_list(inp_df, inp_cfg):
 
     return sql_op_lines
 
-
-def create_insert_row_statements(inp_df, inp_cfg):
+def create_insert_row_many(inp_df, inp_cfg):
     '''
 
     INSERT INTO tbl_nm (
@@ -68,6 +86,42 @@ def create_insert_row_statements(inp_df, inp_cfg):
     VALUES(col_1 val, col_2 val, col_3_val, etc.);
 
     '''
+
+    all_rows = []
+
+    spacer = "    "
+
+    insert_into_tbl, ordered_columns = create_insert_statement(inp_df, inp_cfg)
+    crt_row = 1
+    for index, row in inp_df.iterrows():
+        values = ['VALUES']
+        value_str = spacer + "("
+        for col_nm in ordered_columns:
+            addition = ''
+            if col_nm in inp_cfg['col_nm2type_and_default']:
+                if inp_cfg['col_nm2type_and_default'][col_nm]["base_type"] == "str":
+                    addition = '"'
+            value_str += f'{addition}{row[col_nm]}{addition}, '
+        # Removing the comma and space
+        value_str = value_str[:-2]
+        value_str += ");"
+        values.append(value_str)
+        all_rows += insert_into_tbl + values
+
+        crt_row += 1
+        if crt_row % 2000 == 0:
+            print("Reached row #" + str(crt_row))
+            with open("tmp/op_sql_rn_" + str(crt_row) + ".sql", 'w') as g:
+                g.write("\n".join(all_rows))
+            all_rows = []
+            insert_into_tbl, ordered_columns = create_insert_statement(inp_df, inp_cfg)
+    #values[-1] = values[-1][:-1] + ";"
+
+    return all_rows
+
+
+def create_insert_statement(inp_df, inp_cfg):
+
     spacer = "    "
     insert_into_tbl = [f"INSERT INTO {inp_cfg['tbl_nm']} ("]
     ordered_columns = []
@@ -76,6 +130,26 @@ def create_insert_row_statements(inp_df, inp_cfg):
         ordered_columns.append(col_nm)
     insert_into_tbl[-1] = insert_into_tbl[-1][:-1]
     insert_into_tbl.append(")")
+
+    return insert_into_tbl, ordered_columns 
+
+
+
+
+def create_insert_row_statements_w_values(inp_df, inp_cfg):
+    '''
+
+    INSERT INTO tbl_nm (
+        col1_nm,
+        col2_nm,
+        col3_nm,
+        col4_nm
+    )
+    VALUES(col_1 val, col_2 val, col_3_val, etc.);
+
+    '''
+
+    insert_into_tbl, ordered_columns = create_insert_statement(inp_df, inp_cfg)
 
     # max_rows = float('inf')
     crt_row = 1
@@ -98,11 +172,6 @@ def create_insert_row_statements(inp_df, inp_cfg):
     values[-1] = values[-1][:-1] + ";"
 
     return insert_into_tbl + values
-
-
-        
-
-
 
 
 def add_create_table_statements(inp_df, inp_cfg):
@@ -171,14 +240,18 @@ def main():
     args = sys.argv
 
     help_str = "Args must end in '1'. input file comes before that.\n" + \
-                "python3 create_table_sql_script.py inp_tsv config_json op_sql_fp 1\n"
+                "python3 create_table_sql_script.py inp_tsv config_json op_sql_fp 1\n" + \
+                "OR\n" + \
+                "python3 create_table_sql_script.py inp_dir config_json op_sql_dir 2\n"
+
+
     if args[-1] != "1":
         print(help_str)
     else:
         inp_TSV_fp = args[1]
         cfg_json_fp = args[2]
         op_sql_fp = args[3]
-        prepare_create_table_sql_script(inp_TSV_fp, cfg_json_fp, op_sql_fp)
+        prepare_create_table_sql_script(inp_TSV_fp, cfg_json_fp, op_sql_fp, typ=2)
         #splitFASTQ(inp_FQ)
 
 

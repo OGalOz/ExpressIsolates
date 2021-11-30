@@ -3,6 +3,7 @@ var fs = require('fs');
 var router = express.Router();
 var qzv_data_base = '/data/QZVs'
 var process = require("process");
+var mysql = require('mysql2');
 //import process from 'process';
 const readline = require('readline');
 
@@ -50,6 +51,41 @@ router.get(qzv_data_base + '/:dataname(*)/:basefile(*)', function(req, res, next
     }
 });
 
+
+router.get('/mysql/ASV_test/:asv_name(*)/:pw(*)', function (req, res, next) {
+
+    let asv_name = req.params.asv_name;
+    let pw = req.params.pw;
+
+    var con = mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: pw,
+      database: "ASV_test"
+    });
+    
+    let query_str = "SELECT sample, relative_abundance FROM Sample2ASV2RelativeAbundance WHERE asv=asdf;"
+    query_str  = query_str.replace("asdf", "'" + asv_name + "'")
+
+    con.connect(function(err) {
+          if (err) throw err;
+          con.query(query_str, 
+                    function (err, result, fields) {
+            if (err) {
+                res.status(400).send("Query failed. " + `${err}`)
+                throw err;
+            }
+
+            let x = result;
+            res_str = typeof x;
+            res_str = res_str.toString()
+            res.status(200).send("Got it: " + JSON.stringify(x));
+          });
+          con.end()
+    });
+
+
+})
 
 
 /* QIIME2 Fixed sheets */

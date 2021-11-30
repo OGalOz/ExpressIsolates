@@ -1,0 +1,11 @@
+{
+
+    "cols_nm": "Sample",
+    "rows_nm": "ASV",
+    "vals_nm": "value",
+    "rm_vals": ["Taxonomy"],
+    "other_nms": [] 
+
+
+}
+

@@ -3,6 +3,7 @@ data
 INFO.txt
 TD.txt
 js_src/table-with-taxonomy.tsv
+js_src/connect_to_mysql.js
 MYSQL_COMMANDS.txt
 MYSQL_INFO.txt
 tmp/*
