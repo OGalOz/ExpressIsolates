@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SQL-ASV Grid</title>
+    <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
+    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-balham.css">
+</head>
+<body>
+
+    <script>
+    //PLZREPLACEMEDEARGOD
+    // let the grid know which columns and what data to use
+    const gridOptions = {
+      columnDefs: columnDefs,
+      rowData: rowData,
+      rowSelection: 'multiple'
+    };
+    // domLayout: 'autoHeight'
+    function columnWidth(id, percentage){
+        var div = $("#" + id);  // HTML ID of Grid
+        var parent = div.parent();
+        var width = parent.width() * percentage/100;  // Pixel calculation
+        return width;
+    } 
+    // setup the grid after the page has finished loading
+    document.addEventListener('DOMContentLoaded', () => {
+        const gridDiv = document.querySelector('#myGrid');
+        new agGrid.Grid(gridDiv, gridOptions);
+    });
+    </script>
+    <!--<div id="gridContainer" style="height: 100%; width: 100%;"> --!>
+        <div id="myGrid" style="height: 500px; width: 100%;"  class="ag-theme-balham"></div>
+    <!--<</div> --!>
+        <button onclick="getSelectedRows()">Get Selected Rows</button>
+            <script>
+    const getSelectedRows = () => {
+        const selectedNodes = gridOptions.api.getSelectedNodes()
+        const selectedData = selectedNodes.map( node => node.data )
+        console.log(selectedData)
+        convert_rows_to_CSV_string(selectedData)
+        //const selectedDataStringPresentation = selectedData.map( node => `${node.asv} ${node.sample}`).join(', ')
+        //alert(`Selected nodes: ${selectedDataStringPresentation}`);
+    }
+
+
+
+    function convert_rows_to_CSV_string(selectedData) {
+        // selectedData list<node_dictionary>, where each key of node_dictionary
+        // is a column name
+        if (!(Array.isArray(selectedData))) {
+            alert("Problem creating CSV from selected rows.")
+            throw "'selectedData' not Array."
+        }
+        let col_names = Object.keys(selectedData[0])
+        let op_f_list = [col_names]
+        let op_str = col_names.join(",") + "\n"
+        for (i = 0; i < selectedData.length; i++) {
+            let node = selectedData[i]
+            console.log(node)
+            let op_list = []
+            for (j = 0; j < col_names.length; j++) {
+                let key = col_names[j]
+                op_list.push(node[key])
+            }
+            op_f_list.push(op_list)
+        }
+
+        serveStringFile1(op_f_list)
+        //serveStringFile2(op_f_list)
+
+
+        //alert(op_str)
+        //op_str = selectedData.map( node => `${node.asv},${node.sample}`).join('\n')
+        //console.log(op_str)
+    }
+
+    function serveStringFile1(op_f_list) {
+
+        file_str = ""
+        for (i = 0; i < op_f_list.length; i++) {
+            file_str += op_f_list[i].join(',') + "\n"
+        }
+        //alert(file_str)
+        let hiddenElement = document.createElement('a');  
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(file_str);  
+        hiddenElement.target = '_blank';  
+        //provide the name for the CSV file to be downloaded  
+        hiddenElement.download = 'tabular_ASV_data.csv';  
+        hiddenElement.click();  
+
+        /*
+        let newWindow = window.open("about:blank", "", "_blank"); 
+             
+        if (newWindow) { 
+            	newWindow.document.write(file_str); 
+            } 
+        */
+    }
+
+    function serveStringFile2(op_f_list) {
+        // op_f_list is a list of list of strings, where each string is
+        // a component of the output. e.g. [['a','b'],[1,2],[4,9]]
+
+        var data = {'file_list': op_f_list}
+        $.ajax({
+          url: './text_list_to_file',
+          type: 'GET',
+          contentType:'application/json',
+          data: data,
+          dataType:'json'
+        });
+    }
+
+
+            </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Query landing page</title>
+    <!--<script src="table_data.js"></script> --!>
+    
+
+    <style>
+        .qur_forms {
+            width: 300px;
+            height: 100px;
+            background-color: lightgray;
+            margin: 20px 0;
+            border-style: solid;
+            border-color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div id="single_value_form" class="qur_forms">
+        <form action="/single_value" id="sv_form", method="get">
+            ASV: <input type="text" name="ASV_name">
+            <p></p>
+            Sample: <input type="text" name="Sample_name">
+            <p></p>
+            <input type="submit">
+        </form>
+    </div>
+    <div id="sample_values_form" class="qur_forms">
+        <form action="/sample_values" id="asv2samples" method="get">
+            ASV: <input type="text" name="ASV_name">
+            <p></p>
+            <input type="submit">
+        </form>
+    </div>
+    <div id="asv_values_form" class="qur_forms">
+        <form action="/asv_values" id="samples2asv" method="get">
+            Sample: <input type="text" name="Sample_name">
+            <p></p>
+            <input type="submit">
+        </form>
+    </div>
+</body>
+</html>
+
+
+
