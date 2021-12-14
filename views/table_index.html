@@ -15,7 +15,10 @@
     const gridOptions = {
       columnDefs: columnDefs,
       rowData: rowData,
-      rowSelection: 'multiple'
+      rowSelection: 'multiple',
+      defaultColDef: {
+                  resizable: true
+      }
     };
     // domLayout: 'autoHeight'
     function columnWidth(id, percentage){
