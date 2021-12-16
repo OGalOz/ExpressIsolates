@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>SQL-ASV Grid</title>
-    <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <script src="./testingjavascripts/ag-grid-community.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
     <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-balham.css">
@@ -35,15 +35,18 @@
     </script>
     <!--<div id="gridContainer" style="height: 100%; width: 100%;"> --!>
         <div id="myGrid" style="height: 500px; width: 100%;"  class="ag-theme-balham"></div>
-    <!--<</div> --!>
-        <button onclick="getSelectedRows()">Get Selected Rows</button>
         <br>
+    <!--<</div> --!>
+        <button onclick="gridOptions.api.selectAll()">Select All</button>
+        <br><br>
+        <button onclick="getSelectedRows()">Get Selected Rows</button>
+        <br><br><br>
         <b>Total number of rows: {*ROW_NUMBER*}</b>
             <script>
     const getSelectedRows = () => {
         const selectedNodes = gridOptions.api.getSelectedNodes()
         const selectedData = selectedNodes.map( node => node.data )
-        console.log(selectedData)
+        //console.log(selectedData)
         convert_rows_to_CSV_string(selectedData)
         //const selectedDataStringPresentation = selectedData.map( node => `${node.asv} ${node.sample}`).join(', ')
         //alert(`Selected nodes: ${selectedDataStringPresentation}`);
@@ -63,7 +66,7 @@
         let op_str = col_names.join(",") + "\n"
         for (i = 0; i < selectedData.length; i++) {
             let node = selectedData[i]
-            console.log(node)
+            //console.log(node)
             let op_list = []
             for (j = 0; j < col_names.length; j++) {
                 let key = col_names[j]

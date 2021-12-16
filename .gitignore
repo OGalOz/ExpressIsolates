@@ -8,3 +8,4 @@ MYSQL_COMMANDS.txt
 MYSQL_INFO.txt
 tmp/*
 *.swp
+nohup.out

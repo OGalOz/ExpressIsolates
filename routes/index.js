@@ -194,14 +194,20 @@ function return_my_sql_query(sql_query, res, format_type, format_func=null) {
     
     var con = mysql.createConnection({
       host: "localhost",
-      user: "root",
-      password: "SQLpw123!",
-      database: "ASV_test"
+      user: "enigma",
+      port: '8888',
+      socketPath: '/var/lib/mysql/mysql.sock',
+      password: "enigma",
+      database: "enigma_isolates"
     });
 
 
     con.connect(function(err) {
-          if (err) throw err;
+          if (err) {
+              console.log(err.message)
+              res.status(500).send("Mysql connection error.")
+              return err
+          };
           con.query(sql_query, 
                     function (err, result, fields) {
             if (err) {
@@ -409,6 +415,10 @@ router.get('/fonts/glyphicons-halflings-regular.woff', function(req, res, next) 
 });
 router.get('/fonts/glyphicons-halflings-regular.woff2', function(req, res, next) {
   res.sendFile('fonts/glyphicons-halflings-regular.woff2');
+});
+router.get('/javascripts/ag-grid-community.min.js', function(req, res, next) {
+    console.log("here AG!")
+    res.sendFile('javascripts/ag-grid-community.min.js');
 });
 router.get('/javascripts/bootstrap.min.js', function(req, res, next) {
   res.sendFile('javascripts/bootstrap.min.js');
