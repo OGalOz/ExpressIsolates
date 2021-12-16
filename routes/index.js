@@ -117,9 +117,42 @@ router.get('/single_value', function (req, res, next) {
     query_str = query_str.replace('qwer', sample_name)
     //console.log(query_str)
 
-    return_my_sql_query(query_str, res, format_sql_results, "single_value" )
+    return_my_sql_query(query_str, res, "single_value" )
 
 })
+
+
+router.get('/srch_by_taxonomy', function (req, res, next) {
+    
+    let qr_res = req.query;
+    
+    query_str = get_init_query_str() 
+    taxonomy_types = ["domain", "phylum", "class", "order",
+                      "family", "genus", "species"]
+
+    append_query_str = "WHERE "
+    non_empty_val_bool = false
+    taxonomy_types.forEach(element => {
+        if (qr_res[element] != "") {
+            non_empty_val_bool = true
+            append_query_str += `a.${element}='${qr_res[element]}' AND `
+        }
+    })
+    if (!(non_empty_val_bool)) {
+        res.status(200).send("No search values given.")
+    }
+    // Removing last AND 
+    append_query_str = append_query_str.slice(0,-5) + ";"
+    query_str += append_query_str;;
+    console.log(query_str);
+
+    //res.status(200).send("Incomplete func.")
+
+    return_my_sql_query(query_str, res, "srch_by_taxonomy" )
+
+})
+
+
 
 
 function get_init_query_str() {
@@ -142,11 +175,21 @@ router.get('/asv_values', function (req, res, next) {
     console.log(query_str)
     // below args are 
     // string, res (object), format_sql_results (function), string
-    return_my_sql_query(query_str, res, format_sql_results, "asv_values" )
+    return_my_sql_query(query_str, res, "asv_values" )
 
 })
 
-function return_my_sql_query(sql_query, res, format_func, format_type) {
+function return_my_sql_query(sql_query, res, format_type, format_func=null) {
+    /*
+     * Args:
+     * sql_query (str)
+     * res (response object as provided by express)
+     * format_func (function)
+     * format_type (str): Fixed vocabulary options for what type of query is being
+     *                    performed.
+     *
+     *
+     */
     // format_func is normally 'format_sql_results'
     
     var con = mysql.createConnection({
@@ -169,8 +212,12 @@ function return_my_sql_query(sql_query, res, format_func, format_type) {
             let sql_result = result;
             
             // below function is normally 'format_sql_results'
-            // but can be other functions
-            format_func(res, sql_result, format_type);
+            // but can be other functions (?)
+            if (format_func === null) {
+                format_sql_results(res, sql_result, format_type);
+            } else {
+                format_func(res, sql_result, format_type);
+            }
             /*
             let x = result;
             res_str = typeof x;
@@ -195,17 +242,18 @@ function format_sql_results(res, sql_result, format_type) {
         console.log("did not find format_type to be string")
         res.status(500).send("Server error. Contact maintainers.")
     }
-    if (sql_result == []) {
-        res.status(200).send("No matches found.")
-    }
-
-    if (["asv_values", "sample_values", "single_value"].includes(format_type)) {
-        // We return the Javascript filterable/sortable table
-        // created by 'ag_grid.js'
-
-        prepare_ag_grid(res, sql_result, format_type)
+    if (sql_result.length == 0) {
+        res.status(400).send("No matches found.")
     } else {
-        throw "format_type not recognized";
+
+        if (["asv_values", "sample_values", "single_value", "srch_by_taxonomy"].includes(format_type)) {
+            // We return the Javascript filterable/sortable table
+            // created by 'ag_grid.js'
+            
+            prepare_ag_grid(res, sql_result, format_type)
+        } else {
+            res.status(200).send("format_type not recognized")
+        }
     }
 }
 
@@ -220,15 +268,23 @@ function prepare_ag_grid(res, sql_result, format_type) {
     if (!(typeof sql_result == 'object')) {
         res.status(400).send("SQL Query object not as expected. ")
         console.log("SQL Query object not JS 'object' as expected. ") 
+        return null
     } else if (sql_result.length == 0) {
-        res.status(200).send("No results match query.")
+       res.status(200).send("No results match query.")
+       return null
     }
 
    // sql_result is a list of dictionaries
    // with keys 'asv', 'sample', and 'relative_abundance',
    // which all point to strings
-
-   first_dictionary = sql_result[0]
+    
+   let num_results = sql_result.length;
+    if (num_results == 0) {
+        res.status(200).send("No results found.")
+        return null
+    }
+   // We know from a previous function that there is at least a single result here
+   let first_dictionary = sql_result[0]
    let col_names = Object.keys(first_dictionary)
    console.log("COL NAMES: " + col_names.join())
 
@@ -237,7 +293,7 @@ function prepare_ag_grid(res, sql_result, format_type) {
     ag_grid_string = create_ag_grid_string(col_names, sql_result,
                                                      colnm2type)
     
-    serve_ag_file(res, ag_grid_string)
+    serve_ag_file(res, ag_grid_string, num_results)
 
 }
 
@@ -282,7 +338,11 @@ function create_ag_grid_string(col_names, sql_result, colnm2type) {
 
 }
 
-function serve_ag_file(res, ag_grid_string) {
+function serve_ag_file(res, ag_grid_string, num_results) {
+    /*
+     * num_results (int Number): Number of rows as result of sql query.
+     *
+     */
     // We get the file at views/table_index.html
     // and replace substring with new ag_grid_string
     // and then serve this file.
@@ -292,6 +352,7 @@ function serve_ag_file(res, ag_grid_string) {
         let file_str = fs.readFileSync(fp, 'utf8')
 
         file_str = file_str.replace("//PLZREPLACEMEDEARGOD", ag_grid_string);
+        file_str = file_str.replace("{*ROW_NUMBER*}", num_results.toString());
         res.set('Content-Type', 'text/html')
         res.status(200).send(file_str)
     }
@@ -308,7 +369,7 @@ router.get('/sample_values', function (req, res, next) {
     query_str = query_str.replace('asdf', asv_name)
     console.log("QUERY:  " + query_str)
 
-    return_my_sql_query(query_str, res, format_sql_results, "sample_values")
+    return_my_sql_query(query_str, res, "sample_values")
 
 })
 

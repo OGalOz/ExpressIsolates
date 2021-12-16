@@ -15,31 +15,74 @@
             border-color: gray;
         }
     </style>
+    <script>
+        /*
+        function validateForm(typ) {
+       if (typ == 1) {
+
+       }
+        }
+       */
+    </script>
 </head>
 <body>
+    <b>Search by ASV & Sample</b>
     <div id="single_value_form" class="qur_forms">
-        <form action="/single_value" id="sv_form", method="get">
+        <form action="/single_value" id="sv_form" 
+            onsubmit="return validateForm(1)"  method="get">
             ASV: <input type="text" name="ASV_name">
             <p></p>
             Sample: <input type="text" name="Sample_name">
             <p></p>
-            <input type="submit">
+            <input type="submit" maxlength="64" 
+             title="No quotations, quotes or backticks.">
         </form>
     </div>
+    <br>
+    <br>
+    <b>Search by ASV</b>
     <div id="sample_values_form" class="qur_forms">
         <form action="/sample_values" id="asv2samples" method="get">
             ASV: <input type="text" name="ASV_name">
             <p></p>
-            <input type="submit">
+            <input type="submit" maxlength="64">
         </form>
     </div>
+    <br>
+    <br>
+    <b>Search by Sample</b>
     <div id="asv_values_form" class="qur_forms">
         <form action="/asv_values" id="samples2asv" method="get">
             Sample: <input type="text" name="Sample_name">
             <p></p>
-            <input type="submit">
+            <input type="submit" maxlength="64">
         </form>
     </div>
+    <br>
+    <br>
+    <b>Search by Taxonomy</b>
+    <div id="srch_by_taxonomy" style="height: 250px;" class="qur_forms">
+        <form action="/srch_by_taxonomy" id="srch_by_taxonomy" method="get">
+            Domain: <input type="text" name="domain">
+            <p></p>
+            Phylum: <input type="text" name="phylum">
+            <p></p>
+            Class: <input type="text" name="class">
+            <p></p>
+            Order: <input type="text" name="order">
+            <p></p>
+            Family: <input type="text" name="family">
+            <p></p>
+            Genus: <input type="text" name="genus">
+            <p></p>
+            Species: <input type="text" name="species">
+            <p></p>
+            <input type="submit" maxlength="64">
+        </form>
+    </div>
+    <br>
+    <br>
+    <br>
 </body>
 </html>
 
