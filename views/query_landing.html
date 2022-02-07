@@ -3,7 +3,6 @@
 <head>
     <title>Query landing page</title>
     <!--<script src="table_data.js"></script> --!>
-    
 
     <style>
         .qur_forms {
@@ -22,62 +21,110 @@
 
        }
         }
+
+        function validate(form_id) {
+            // form_id is the string id of the form
+            let crt_form = document.getElementById(form_id)
+
+            for (i=0; i < myform.childElementCount; i++) {
+                crt_elem = myform.children[i]
+                console.log(crt_elem.tagName)
+                if (crt_elem.tagName == "INPUT") {
+                }
+            }
+
+
+
+            fields = [];
+            if (document.form.price.value.trim() === "") {
+                alert("Please enter a price");
+                document.form.price.focus();
+                return false;
+            }
+            if (document.form.price.value !== "") {
+                if (! (/^\d*(?:\.\d{0,2})?$/.test(document.form.price.value))) {
+                    alert("Please enter a valid price");
+                    document.form.price.focus();
+                    return false;
+            }
+            }
+            return true;
+            }
+
+
+
        */
     </script>
 </head>
 <body>
+    <b>Get Sequence from ASV</b>
+    <div id="asv2sequence_form" class="qur_forms">
+        <form action="/testingasv2seq" id="asv2seq" method="get">
+            ASV: <input type="text" name="ASV_name" maxlength="64">
+            <p></p>
+            <input type="submit">
+        </form>
+    </div>
+    <br>
+    <br>
+    <b>Get Sequences from ASVs (Limit is 100 ASVs)</b>
+    <div id="asvs2sequences_form" class="qur_forms">
+        <form action="/testingasvs2seqs" id="asvs2seqs" method="get">
+            ASVs: <input type="text" name="ASV_names" maxlength="100000">
+            <p></p>
+            <input type="submit">
+        </form>
+    </div>
+
     <b>Search by ASV & Sample</b>
     <div id="single_value_form" class="qur_forms">
-        <form action="/testingsingle_value" id="sv_form" 
-            onsubmit="return validateForm(1)"  method="get">
-            ASV: <input type="text" name="ASV_name">
+        <form action="/testingsingle_value" id="sv_form" method="get" autocomplete="off">
+            ASV: <input type="text" name="ASV_name" maxlength="64">
             <p></p>
-            Sample: <input type="text" name="Sample_name">
+            Sample: <input type="text" name="Sample_name" maxlength="64">
             <p></p>
-            <input type="submit" maxlength="64" 
-             title="No quotations, quotes or backticks.">
+            <input type="submit"  
+             title="No quotations, quotes, backticks, spaces or semi-colons.">
         </form>
     </div>
     <br>
     <br>
     <b>Search by ASV</b>
     <div id="sample_values_form" class="qur_forms">
-        <form action="/testingsample_values" id="asv2samples" method="get">
-            ASV: <input type="text" name="ASV_name">
+        <form action="/testingsample_values" id="asv2samples" method="get" autocomplete="off">
+            ASV: <input type="text" name="ASV_name" maxlength="64">
             <p></p>
-            <input type="submit" maxlength="64">
+            <input type="submit">
         </form>
     </div>
     <br>
     <br>
     <b>Search by Sample</b>
     <div id="asv_values_form" class="qur_forms">
-        <form action="/testingasv_values" id="samples2asv" method="get">
-            Sample: <input type="text" name="Sample_name">
+        <form action="/testingasv_values" id="samples2asv" method="get" autocomplete="off">
+            Sample: <input type="text" name="Sample_name" maxlength="64">
             <p></p>
-            <input type="submit" maxlength="64">
+            <input type="submit" >
         </form>
     </div>
     <br>
     <br>
     <b>Search by Taxonomy</b>
-    <div id="srch_by_taxonomy" style="height: 250px;" class="qur_forms">
-        <form action="/testingsrch_by_taxonomy" id="srch_by_taxonomy" method="get">
-            Domain: <input type="text" name="domain">
+    <div id="srch_by_taxonomy_form" style="height: 250px;" class="qur_forms">
+        <form action="/testingsrch_by_taxonomy" id="srch_by_taxonomy" method="get" autocomplete="off">
+            Phylum: <input type="text" name="phylum" maxlength="64">
             <p></p>
-            Phylum: <input type="text" name="phylum">
+            Class: <input type="text" name="class" maxlength="64">
             <p></p>
-            Class: <input type="text" name="class">
+            Order: <input type="text" name="order" maxlength="64">
             <p></p>
-            Order: <input type="text" name="order">
+            Family: <input type="text" name="family" maxlength="64">
             <p></p>
-            Family: <input type="text" name="family">
+            Genus: <input type="text" name="genus" maxlength="64">
             <p></p>
-            Genus: <input type="text" name="genus">
+            Species: <input type="text" name="species" maxlength="64">
             <p></p>
-            Species: <input type="text" name="species">
-            <p></p>
-            <input type="submit" maxlength="64">
+            <input type="submit">
         </form>
     </div>
     <br>

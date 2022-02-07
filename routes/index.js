@@ -5,6 +5,9 @@ var qzv_data_base = '/data/QZVs'
 var process = require("process");
 var mysql = require('mysql2');
 var mime = require('mime');
+var ibSQL = require('../js_src/isobrow_sql.js')
+
+console.log(ibSQL.test_str)
 
 //var aux_mysql_funcs = require('./js_src/my_sql_funcs')
 const path = require('path');
@@ -17,7 +20,13 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-
+/*
+ * Functions:
+ *  return_sequence
+ *  return_my_sql_query
+ *
+ *
+ */
 
 /* Testing routing for multiple files */
 /*
@@ -104,53 +113,194 @@ function promptClientDownload(fp, res) {
     */
 }
 
+// Returns sequence when given asv hash
+router.get('/asv2seq', function (req, res, next) {
+    
+    let qr_res = req.query;
+    let asv_name = qr_res.ASV_name
+    let chk1 = check_value_safety(asv_name, res)
+    console.log(chk1)
+    if (!(chk1)) {
+        res.status(422).send("SQL query must not include spaces or any types of quotation or semi-colons or colons.")
+        return -1
+    } else {
+
+        query_str = get_seq_query_str(asv_name)
+
+        return_my_sql_query(query_str, res, "asv2seq", return_sequence)
+    }
+
+})
+
+// Returns sequence when given asv hash
+router.get('/asvs2seqs', function (req, res, next) {
+    
+    console.log("Test asvs2seqs here 1.")
+    let qr_res = req.query;
+    let asv_names = qr_res.ASV_names
+    console.log("Test asvs2seqs here 1.5.")
+    let chk1 = check_value_safety(asv_names, res, special="asvs")
+    console.log("Test asvs2seqs here 2.")
+    console.log(chk1)
+    if (!(chk1)) {
+        res.status(422).send("SQL query must not include spaces or any types of quotation or semi-colons or colons.")
+        return -1
+    } else {
+
+        console.log("Test asvs2seqs here 3.")
+        query_str = get_seq_query_str(asv_names, multi=true)
+
+        return_my_sql_query(query_str, res, "asvs2seqs", return_sequence)
+    }
+
+})
+
+
+
+
+function return_sequence(res, sql_result, format_type) {
+
+    if (sql_result.length == 0) {
+        res.status(200).send("No matches found.")
+    } else {
+        res.status(200).send(sql_result)
+    }
+}
+
+
+
+
 router.get('/single_value', function (req, res, next) {
     
     let qr_res = req.query;
     let asv_name = qr_res.ASV_name
+    let chk1 = check_value_safety(asv_name, res)
+    if (!(chk1)) {
+        res.status(422).send("SQL query must not include spaces or any types of quotation or semi-colons or colons.")
+        return -1
+
+    }
     let sample_name = qr_res.Sample_name
+    let chk2 = check_value_safety(sample_name, res)
 
-    query_str = get_init_query_str() 
-    query_str += "WHERE s.asv='asdf' "
-    query_str += "AND s.sample='qwer';"
-    query_str = query_str.replace('asdf', asv_name)
-    query_str = query_str.replace('qwer', sample_name)
-    //console.log(query_str)
+    if (chk1 && chk2) {
 
-    return_my_sql_query(query_str, res, "single_value" )
+        query_str = get_init_query_str() 
+        query_str += "WHERE s.asv='asdf' "
+        query_str += "AND s.sample='qwer';"
+        query_str = query_str.replace('asdf', asv_name)
+        query_str = query_str.replace('qwer', sample_name)
+        //console.log(query_str)
+
+        return_my_sql_query(query_str, res, "single_value" )
+
+    } else{
+        res.status(422).send("SQL query must not include spaces or any types of quotation or semi-colons or colons.")
+    }
 
 })
 
 
 router.get('/srch_by_taxonomy', function (req, res, next) {
-    
-    let qr_res = req.query;
-    
-    query_str = get_init_query_str() 
-    taxonomy_types = ["domain", "phylum", "class", "order",
-                      "family", "genus", "species"]
+    let active = false
+    if (!(active)) {
+        res.status(200).send("Search by taxonomy temporarily disabled.")
+    } else {
 
-    append_query_str = "WHERE "
-    non_empty_val_bool = false
-    taxonomy_types.forEach(element => {
-        if (qr_res[element] != "") {
-            non_empty_val_bool = true
-            append_query_str += `a.${element}='${qr_res[element]}' AND `
+        let qr_res = req.query;
+        console.log(qr_res) 
+        query_str = get_init_query_str() 
+        taxonomy_types = ["phylum", "class", "order",
+                          "family", "genus", "species"]
+
+        let append_query_str = "WHERE "
+        let non_empty_val_bool = false
+        let check_bool = true
+        let crt_check = null
+        taxonomy_types.forEach(element => {
+            if (qr_res[element] != "") {
+                crt_check = check_value_safety(qr_res[element], res)
+                check_bool = check_bool && crt_check
+                non_empty_val_bool = true
+                append_query_str += `a.${element}='${qr_res[element]}' AND `
+            }
+        })
+        console.log("srch by taxonomy mid")
+        
+        if (check_bool) {
+            console.log("found results")
+
+            if (!(non_empty_val_bool)) {
+                res.status(200).send("No search values given.")
+            }
+            // Removing last AND 
+            append_query_str = append_query_str.slice(0,-5) + ";"
+            query_str += append_query_str;;
+            console.log(query_str);
+
+            //res.status(200).send("Incomplete func.")
+
+            return_my_sql_query(query_str, res, "srch_by_taxonomy" )
+        } else {
+            console.log("Did not find results")
+            res.status(422).send("SQL query must not include spaces or any types of quotation or semi-colons or colons.")
         }
-    })
-    if (!(non_empty_val_bool)) {
-        res.status(200).send("No search values given.")
     }
-    // Removing last AND 
-    append_query_str = append_query_str.slice(0,-5) + ";"
-    query_str += append_query_str;;
-    console.log(query_str);
-
-    //res.status(200).send("Incomplete func.")
-
-    return_my_sql_query(query_str, res, "srch_by_taxonomy" )
 
 })
+
+
+function check_value_safety(inp_str, res, special=null) {
+    console.log("Checking value safety")
+    // inp_str (String to check)
+    // res: Express response object
+    let chars_to_check = ["'", '"', " ", "`", ";", ":", "\\", ","];
+    if (special == "asvs") {
+        chars_to_check.pop()
+    }
+    let ret_val = true
+    chars_to_check.forEach(bad_char => {
+        if (inp_str.includes(bad_char)) {
+            console.log("Bad request, contains '{" + bad_char 
+                        + "}' : " + inp_str)
+            ret_val = false
+        }
+    })
+    if (ret_val) {
+        console.log("Validated input: " + inp_str)
+    }
+    console.log("Finished checking value safety")
+    // Yes regex check?
+    return ret_val 
+
+}
+
+function get_seq_query_str(asv_name, multi=false) {
+    if (!(multi)) {
+        let query_str = "SELECT a.seq " 
+        query_str += 'FROM asv2seq a WHERE '
+        query_str += 'asv = "asdf";'
+        query_str = query_str.replace('asdf', asv_name)
+        return query_str
+    } else {
+        console.log("Parsing multiple asvs")
+        // multiple strings, should have comma
+        let asvs_list = asv_name.split(',');
+        let query_str = "SELECT * FROM asv2seq a WHERE " 
+        for (let ix in asvs_list) {
+            let asv = asvs_list[ix];
+            query_str += 'asv = "' + asv + '"';
+            if (ix < asvs_list.length - 1) {
+                query_str += " OR "
+            } else {
+                query_str += ";"
+            }
+        }
+        console.log(query_str)
+        return query_str
+    }
+    console.log("Shouldn't get here")
+}
 
 
 
@@ -168,14 +318,18 @@ router.get('/asv_values', function (req, res, next) {
     
     let qr_res = req.query;
     let sample_name = qr_res.Sample_name
-    
-    query_str = get_init_query_str() 
-    query_str += "WHERE s.sample='asdf';"
-    query_str = query_str.replace('asdf', sample_name)
-    console.log(query_str)
-    // below args are 
-    // string, res (object), format_sql_results (function), string
-    return_my_sql_query(query_str, res, "asv_values" )
+    let check_bool = check_value_safety(sample_name, res)
+    if (check_bool) {
+      query_str = get_init_query_str() 
+      query_str += "WHERE s.sample='asdf';"
+      query_str = query_str.replace('asdf', sample_name)
+      console.log(query_str)
+      // below args are 
+      // string, res (object), format_sql_results (function), string
+      return_my_sql_query(query_str, res, "asv_values" )
+    } else {
+        res.status(422).send("SQL query must not include spaces or any types of quotation or semi-colons or colons.")
+    }
 
 })
 
@@ -191,6 +345,7 @@ function return_my_sql_query(sql_query, res, format_type, format_func=null) {
      *
      */
     // format_func is normally 'format_sql_results'
+    // Could be format_sql_seq
     
     var con = mysql.createConnection({
       host: "localhost",
@@ -249,10 +404,12 @@ function format_sql_results(res, sql_result, format_type) {
         res.status(500).send("Server error. Contact maintainers.")
     }
     if (sql_result.length == 0) {
-        res.status(400).send("No matches found.")
+        res.status(200).send("No matches found.")
     } else {
 
-        if (["asv_values", "sample_values", "single_value", "srch_by_taxonomy"].includes(format_type)) {
+        if (["asv_values", "sample_values", 
+            "single_value", "srch_by_taxonomy", "asv2seq",
+            "asvs2seqs"].includes(format_type)) {
             // We return the Javascript filterable/sortable table
             // created by 'ag_grid.js'
             
@@ -369,13 +526,20 @@ router.get('/sample_values', function (req, res, next) {
     
     let qr_res = req.query;
     let asv_name = qr_res.ASV_name
+    let check_bool = check_value_safety(asv_name, res)
+    if (check_bool) {
 
-    query_str = get_init_query_str()  
-    query_str += "WHERE s.asv='asdf';"
-    query_str = query_str.replace('asdf', asv_name)
-    console.log("QUERY:  " + query_str)
+        query_str = get_init_query_str()  
+        query_str += "WHERE s.asv='asdf';"
+        query_str = query_str.replace('asdf', asv_name)
+        console.log("QUERY:  " + query_str)
 
-    return_my_sql_query(query_str, res, "sample_values")
+        return_my_sql_query(query_str, res, "sample_values")
+    } else {
+
+        res.status(422).send("SQL query must not include spaces or any types of quotation or semi-colons or colons.")
+
+    }
 
 })
 
@@ -441,6 +605,16 @@ router.get('/javascripts/vendor.bundle.js', function(req, res, next) {
 router.get('/images/qiime2-rect-200.png', function(req, res, next) {
   res.sendFile('images/qiime2-rect-200.png');
 });
+router.get('/javascripts/Tries/taxonomy_tries.js', function(req, res, next) {
+  res.sendFile('javascripts/Tries/taxonomy_tries.js');
+});
+router.get('/javascripts/Tries/TrieFuncs.js', function(req, res, next) {
+  res.sendFile('javascripts/Tries/TrieFuncs.js');
+});
+router.get('/javascripts/Tries/lowercase_to_originals.js', function(req, res, next) {
+  res.sendFile('javascripts/Tries/lowercase_to_originals.js');
+});
+
 
 
 /* Temporary QIIME2 Values */
@@ -493,7 +667,6 @@ async function processLineByLine(num_lines, fp) {
   }
 }
 
-
 router.get('/test_parse', function(req, res, next) {
 
     let fp = "./data/testing/table-with-taxonomy.tsv";
@@ -506,6 +679,18 @@ router.get('/test_parse', function(req, res, next) {
 
 });
 
+router.get('/taxon_asv', function(req, res, next) {
+
+    let fp = "./views/taxonomy_landing.html";
+    if (fs.existsSync(fp)) {
+        console.log("HERE.")
+        let file_str = fs.readFileSync(fp)
+        res.set('Content-Type', 'text/html')
+        res.status(200).send(file_str)
+    } else {
+        res.send("Not found");
+    }
+});
 
 router.get('/query_asv', function(req, res, next) {
 

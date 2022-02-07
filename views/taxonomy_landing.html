@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ENIGMA Search By Taxonomy</title>
+    <!--<script src="table_data.js"></script> --!>
+    <script src="testingjavascripts/Tries/taxonomy_tries.js"></script>
+    <script src="testingjavascripts/Tries/TrieFuncs.js"></script>
+    <script src="testingjavascripts/Tries/lowercase_to_originals.js"></script>
+    <style>
+        .qur_forms {
+            width: 300px;
+            height: 125px;
+            background-color: lightgray;
+            margin: 20px 0;
+            border-style: solid;
+            border-color: gray;
+        }
+    </style>
+    <script>
+    function acf(inp_id) {
+        let input_el = document.getElementById(inp_id);
+        let prefix_str = input_el.value.toLowerCase()
+        if (prefix_str != "") {
+            // Below functions both from TrieFuncs
+            let [RT, fix_inp] = get_root_trie(inp_id);
+            let word_list = get_all_words_start_with(RT, prefix_str, fix_inp); 
+            let option_list = create_Option_list(word_list);
+            let data_list = input_el.list;
+            updateDataList(data_list, option_list);
+        }
+    }
+    function get_root_trie(inp_id) {
+        let input_type = inp_id.split('_')[0]
+        let fix_inp = input_type[0].toUpperCase() + input_type.slice(1,)
+        // This element from imported script taxonomy_tries.js
+        let root_trie = TaxTries[fix_inp]
+
+        return [root_trie, fix_inp]
+    }
+
+    </script>
+</head>
+<body>
+    <b>Search by Taxonomy</b>
+    <div id="srch_by_taxonomy_form" style="height: 300px;" class="qur_forms">
+        <form action="/testingsrch_by_taxonomy" id="srch_by_taxonomy" 
+            method="get" autocomplete="off">
+            Domain: <input type="text" name="domain" maxlength="64" id="domain_search_inp" 
+                     list="domainSuggestions" oninput="acf(this.id)">
+            <datalist id="domainSuggestions"></datalist>
+            <br/><br/>
+            Phylum: <input type="text" name="phylum" maxlength="64" id="phylum_search_inp" 
+                     list="phylumSuggestions" oninput="acf(this.id)">
+            <datalist id="phylumSuggestions"></datalist>
+            <br/><br/>
+            Class: <input type="text" name="class" maxlength="64" id="class_search_inp" 
+                    list="classSuggestions" oninput="acf(this.id)">
+            <datalist id="classSuggestions"></datalist>
+            <br/><br/>
+            Order: <input type="text" name="order" maxlength="64" id="order_search_inp" 
+                    list="orderSuggestions" oninput="acf(this.id)">
+            <datalist id="orderSuggestions"></datalist>
+            <br/><br/>
+            Family: <input type="text" name="family" maxlength="64" id="family_search_inp" 
+                    list="familySuggestions" oninput="acf(this.id)">
+            <datalist id="familySuggestions"></datalist>
+            <br/><br/>
+            Genus: <input type="text" name="genus" maxlength="64" id="genus_search_inp" 
+                    list="genusSuggestions" oninput="acf(this.id)">
+            <datalist id="genusSuggestions"></datalist>
+            <br/><br/>
+            Species: <input type="text" name="species" maxlength="64" id="species_search_inp" 
+                    list="speciesSuggestions" oninput="acf(this.id)">
+            <datalist id="speciesSuggestions"></datalist>
+            <br/><br/>
+            <input type="submit">
+        </form>
+    </div>
+    <br/><br/>
+    <br>
+    <br>
+</body>
+</html>
+
+
+

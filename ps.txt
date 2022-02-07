@@ -1,0 +1,276 @@
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0 194028  4836 ?        Ss    2021 166:53 /usr/lib/systemd/systemd --switched-root --system --deserialize 21
+root         2  0.0  0.0      0     0 ?        S     2021   0:43 [kthreadd]
+root         3  0.0  0.0      0     0 ?        S     2021   1:13 [ksoftirqd/0]
+root         5  0.0  0.0      0     0 ?        S<    2021   0:09 [kworker/0:0H]
+root         8  0.0  0.0      0     0 ?        S     2021   0:50 [migration/0]
+root         9  0.0  0.0      0     0 ?        S     2021   0:00 [rcu_bh]
+root        10  0.0  0.0      0     0 ?        S     2021 269:54 [rcu_sched]
+root        11  0.0  0.0      0     0 ?        S     2021   1:31 [watchdog/0]
+root        12  0.0  0.0      0     0 ?        S     2021   1:18 [watchdog/1]
+root        13  0.0  0.0      0     0 ?        S     2021   5:49 [migration/1]
+root        14  0.0  0.0      0     0 ?        S     2021   1:00 [ksoftirqd/1]
+root        16  0.0  0.0      0     0 ?        S<    2021   0:00 [kworker/1:0H]
+root        17  0.0  0.0      0     0 ?        S     2021   1:17 [watchdog/2]
+root        18  0.0  0.0      0     0 ?        S     2021   0:37 [migration/2]
+root        19  0.0  0.0      0     0 ?        S     2021   0:22 [ksoftirqd/2]
+root        21  0.0  0.0      0     0 ?        S<    2021   0:00 [kworker/2:0H]
+root        22  0.0  0.0      0     0 ?        S     2021   1:46 [watchdog/3]
+root        23  0.0  0.0      0     0 ?        S     2021   0:41 [migration/3]
+root        24  0.0  0.0      0     0 ?        S     2021  16:30 [ksoftirqd/3]
+root        27  0.0  0.0      0     0 ?        S     2021   1:40 [watchdog/4]
+root        28  0.0  0.0      0     0 ?        S     2021   0:35 [migration/4]
+root        29  0.0  0.0      0     0 ?        S     2021   0:12 [ksoftirqd/4]
+root        31  0.0  0.0      0     0 ?        S<    2021   0:00 [kworker/4:0H]
+root        33  0.0  0.0      0     0 ?        S     2021   1:31 [watchdog/5]
+root        34  0.0  0.0      0     0 ?        S     2021   6:41 [migration/5]
+root        35  0.0  0.0      0     0 ?        S     2021   0:16 [ksoftirqd/5]
+root        37  0.0  0.0      0     0 ?        S<    2021   0:00 [kworker/5:0H]
+root        38  0.0  0.0      0     0 ?        S     2021   1:29 [watchdog/6]
+root        39  0.0  0.0      0     0 ?        S     2021   0:47 [migration/6]
+root        40  0.0  0.0      0     0 ?        S     2021   0:11 [ksoftirqd/6]
+root        42  0.0  0.0      0     0 ?        S<    2021   0:00 [kworker/6:0H]
+root        43  0.0  0.0      0     0 ?        S     2021   1:27 [watchdog/7]
+root        44  0.0  0.0      0     0 ?        S     2021   0:30 [migration/7]
+root        45  0.0  0.0      0     0 ?        S     2021   0:09 [ksoftirqd/7]
+root        47  0.0  0.0      0     0 ?        S<    2021   0:00 [kworker/7:0H]
+root        50  0.0  0.0      0     0 ?        S     2021   0:00 [kdevtmpfs]
+root        51  0.0  0.0      0     0 ?        S<    2021   0:00 [netns]
+root        52  0.0  0.0      0     0 ?        S     2021   0:16 [khungtaskd]
+root        53  0.0  0.0      0     0 ?        S<    2021   0:00 [writeback]
+root        54  0.0  0.0      0     0 ?        S<    2021   0:00 [kintegrityd]
+root        55  0.0  0.0      0     0 ?        S<    2021   0:00 [bioset]
+root        56  0.0  0.0      0     0 ?        S<    2021   0:00 [kblockd]
+root        57  0.0  0.0      0     0 ?        S<    2021   0:00 [md]
+root        61  0.0  0.0      0     0 ?        S     2021  91:38 [kswapd0]
+root        62  0.0  0.0      0     0 ?        S     2021  64:46 [kswapd1]
+root        63  0.0  0.0      0     0 ?        SN    2021   0:00 [ksmd]
+root        64  0.0  0.0      0     0 ?        SN    2021   1:06 [khugepaged]
+root        65  0.0  0.0      0     0 ?        S<    2021   0:00 [crypto]
+root        73  0.0  0.0      0     0 ?        S<    2021   0:00 [kthrotld]
+root        75  0.0  0.0      0     0 ?        S<    2021   0:00 [kmpath_rdacd]
+root        77  0.0  0.0      0     0 ?        S<    2021   0:00 [kpsmoused]
+root        79  0.0  0.0      0     0 ?        S<    2021   0:00 [ipv6_addrconf]
+root        98  0.0  0.0      0     0 ?        S<    2021   0:00 [deferwq]
+root       145  0.0  0.0      0     0 ?        S     2021   2:31 [kauditd]
+root       280  0.0  0.0      0     0 ?        S     2021   0:00 [scsi_eh_0]
+root       282  0.0  0.0      0     0 ?        S<    2021   0:00 [scsi_tmf_0]
+root       291  0.0  0.0      0     0 ?        S<    2021   0:00 [ata_sff]
+root       301  0.0  0.0      0     0 ?        S     2021   0:00 [scsi_eh_1]
+root       302  0.0  0.0      0     0 ?        S<    2021   0:00 [scsi_tmf_1]
+root       303  0.0  0.0      0     0 ?        S     2021   0:00 [scsi_eh_2]
+root       304  0.0  0.0      0     0 ?        S<    2021   0:00 [scsi_tmf_2]
+root       306  0.0  0.0      0     0 ?        S     2021   0:00 [scsi_eh_3]
+root       307  0.0  0.0      0     0 ?        S<    2021   0:00 [scsi_tmf_3]
+root       308  0.0  0.0      0     0 ?        S     2021   0:00 [scsi_eh_4]
+root       309  0.0  0.0      0     0 ?        S<    2021   0:00 [scsi_tmf_4]
+root       311  0.0  0.0      0     0 ?        S     2021   0:00 [scsi_eh_5]
+root       313  0.0  0.0      0     0 ?        S<    2021   0:00 [scsi_tmf_5]
+root       314  0.0  0.0      0     0 ?        S     2021   0:00 [scsi_eh_6]
+root       315  0.0  0.0      0     0 ?        S<    2021   0:00 [scsi_tmf_6]
+root       317  0.0  0.0      0     0 ?        S     2021   0:00 [scsi_eh_7]
+root       319  0.0  0.0      0     0 ?        S<    2021   0:00 [scsi_tmf_7]
+root       320  0.0  0.0      0     0 ?        S     2021   0:00 [scsi_eh_8]
+root       321  0.0  0.0      0     0 ?        S<    2021   0:00 [scsi_tmf_8]
+root       350  0.0  0.0      0     0 ?        S     2021   0:03 [jbd2/sda2-8]
+root       351  0.0  0.0      0     0 ?        S<    2021   0:00 [ext4-rsv-conver]
+root       379  0.0  0.0      0     0 ?        S     2021   0:07 [jbd2/sda3-8]
+root       380  0.0  0.0      0     0 ?        S<    2021   0:00 [ext4-rsv-conver]
+root       441  0.0  0.0 115008 60068 ?        Ss    2021  77:50 /usr/lib/systemd/systemd-journald
+root       462  0.0  0.0      0     0 ?        S<    2021   0:47 [kworker/7:1H]
+root       466  0.0  0.0 203360  2160 ?        Ss    2021   0:00 /usr/sbin/lvmetad -f
+root       477  0.0  0.0      0     0 ?        S<    2021   0:00 [rpciod]
+root       478  0.0  0.0      0     0 ?        S<    2021   0:00 [xprtiod]
+root       484  0.0  0.0  47568   152 ?        Ss    2021   0:00 /usr/lib/systemd/systemd-udevd
+mprice     522  175  0.1 667224 66304 pts/12   RNl  11:02 368:39 hmmer/hmmscan --cut_ga --cpu 8 --domtblout work/curated_pfam.tab Pfam-A.hmm work/data/curated.faa
+root       542  0.0  0.0      0     0 ?        S<    2021   0:00 [kvm-irqfd-clean]
+root       543  0.0  0.0      0     0 ?        S<    2021   0:00 [edac-poller]
+root       575  0.0  0.0      0     0 ?        S     2021   0:00 [jbd2/sdb3-8]
+root       576  0.0  0.0      0     0 ?        S<    2021   0:00 [ext4-rsv-conver]
+root       577  0.0  0.0      0     0 ?        S     2021   0:00 [jbd2/sda1-8]
+root       578  0.0  0.0      0     0 ?        S<    2021   0:00 [ext4-rsv-conver]
+root       583  0.0  0.0      0     0 ?        S     2021  11:28 [jbd2/sdb2-8]
+root       584  0.0  0.0      0     0 ?        S<    2021   0:00 [ext4-rsv-conver]
+root       588  0.0  0.0      0     0 ?        S     2021   7:37 [jbd2/sdb1-8]
+root       589  0.0  0.0      0     0 ?        S<    2021   0:00 [ext4-rsv-conver]
+root       595  0.0  0.0      0     0 ?        S<    2021   0:00 [kdmflush]
+root       596  0.0  0.0      0     0 ?        S<    2021   0:00 [bioset]
+root       609  0.0  0.0      0     0 ?        S<    2021   0:00 [bioset]
+root       610  0.0  0.0      0     0 ?        S<    2021   0:00 [xfsalloc]
+root       611  0.0  0.0      0     0 ?        S<    2021   0:00 [xfs_mru_cache]
+root       612  0.0  0.0      0     0 ?        S<    2021   0:00 [xfs-buf/dm-0]
+root       613  0.0  0.0      0     0 ?        S<    2021   0:00 [xfs-data/dm-0]
+root       614  0.0  0.0      0     0 ?        S<    2021   0:00 [xfs-conv/dm-0]
+root       615  0.0  0.0      0     0 ?        S<    2021   0:00 [xfs-cil/dm-0]
+root       616  0.0  0.0      0     0 ?        S<    2021   0:00 [xfs-reclaim/dm-]
+root       617  0.0  0.0      0     0 ?        S<    2021   0:00 [xfs-log/dm-0]
+root       618  0.0  0.0      0     0 ?        S<    2021   0:00 [xfs-eofblocks/d]
+root       619  0.0  0.0      0     0 ?        S     2021  30:55 [xfsaild/dm-0]
+root       639  0.0  0.0      0     0 ?        S    11:40   0:00 [kworker/7:0]
+root       646  0.0  0.0  19320   116 ?        Ss    2021   0:00 /usr/sbin/rpc.idmapd
+root       647  0.0  0.0  55464   436 ?        S<sl  2021   8:11 /sbin/auditd
+dbus       670  0.0  0.0  66648  1892 ?        Ssl   2021  75:13 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+root       675  0.0  0.0  21548   388 ?        Ss    2021  48:55 /usr/sbin/irqbalance --foreground
+root       677  0.0  0.0 221416  1580 ?        Ss    2021   0:43 /usr/sbin/abrtd -d -s
+root       683  0.0  0.0 496796 34552 ?        Ssl   2021  44:57 /usr/sbin/rsyslogd -n
+libstor+   687  0.0  0.0   8532    32 ?        Ss    2021   1:05 /usr/bin/lsmd -d
+rpc        697  0.0  0.0  64956   148 ?        Ss    2021   0:40 /sbin/rpcbind -w
+root       701  0.0  0.0 129780    24 ?        Ss    2021   0:00 /usr/sbin/smartd -n -q never
+root       702  0.0  0.0  28768  1392 ?        Ss    2021  39:19 /usr/lib/systemd/systemd-logind
+root       703  0.0  0.0 218888    96 ?        Ss    2021   3:36 /usr/bin/abrt-watch-log -F BUG: WARNING: at WARNING: CPU: INFO: possible recursive locking detected ernel BUG at list_del corruption list_add corruption do_IRQ: stack overflow: ear stack overflow (cur: eneral protection fault nable to handle kernel ouble fault: RTNL: assertion failed eek! page_mapcount(page) went negative! adness at NETDEV WATCHDOG ysctl table check failed : nobody cared IRQ handler type mismatch Machine Check Exception: Machine check events logged divide error: bounds: coprocessor segment overrun: invalid TSS: segment not present: invalid opcode: alignment check: stack segment: fpu exception: simd exception: iret exception: /var/log/messages -- /usr/bin/abrt-dump-oops -xtD
+avahi      704  0.0  0.0  60080   444 ?        Ss    2021   2:44 avahi-daemon: running [linux.local]
+chrony     718  0.0  0.0 115640   672 ?        S     2021   3:17 /usr/sbin/chronyd
+root       722  0.0  0.0 360344 25492 ?        Ssl   2021   4:14 /usr/bin/python -Es /usr/sbin/firewalld --nofork --nopid
+root       724  0.0  0.0 203236    48 ?        Ssl   2021   0:31 /usr/sbin/gssproxy -D
+avahi      725  0.0  0.0  59952    24 ?        S     2021   0:00 avahi-daemon: chroot helper
+root       749  0.1  0.0 172080  6104 ?        S     2021 644:54 /usr/bin/perl /usr/sbin/x2gocleansessions
+root       750  0.0  0.0 561116  1816 ?        Ssl   2021  14:32 /usr/sbin/NetworkManager --no-daemon
+nslcd     1280  0.0  0.0 436024  1168 ?        Ssl   2021  34:40 /usr/sbin/nslcd
+root      1286  0.0  0.0  27116   396 ?        Ss    2021  18:33 /usr/sbin/xinetd -stayalive -pidfile /var/run/xinetd.pid
+root      1287  0.0  0.0 307648  2052 ?        Ss    2021  30:48 php-fpm: master process (/etc/opt/rh/rh-php72/php-fpm.conf)
+root      1288  0.0  0.0 106044   448 ?        Ss    2021  14:05 /usr/sbin/sshd -D
+root      1300  0.0  0.0  42564     4 ?        Ss    2021   0:00 /usr/sbin/rpc.mountd
+root      1308  0.0  0.0 259748  8952 ?        Ss    2021  29:01 /usr/sbin/httpd -DFOREGROUND
+rpcuser   1312  0.0  0.0  44460    88 ?        Ss    2021   0:00 /usr/sbin/rpc.statd
+root      1330  0.0  0.0  25860    24 ?        Ss    2021   0:08 /usr/sbin/atd -f
+root      1331  0.0  0.0 132312   836 ?        Ss    2021   7:38 /usr/sbin/crond -n
+root      1341  0.0  0.0 111936     8 tty1     Ss+   2021   0:00 /sbin/agetty --noclear tty1 linux
+root      1365  0.0  0.0      0     0 ?        S<    2021   0:00 [nfsd4_callbacks]
+root      1366  0.0  0.0      0     0 ?        S     2021   0:00 [lockd]
+root      1383  0.0  0.0      0     0 ?        S     2021   0:00 [nfsd]
+root      1384  0.0  0.0      0     0 ?        S     2021   0:00 [nfsd]
+root      1385  0.0  0.0      0     0 ?        S     2021   0:00 [nfsd]
+root      1386  0.0  0.0      0     0 ?        S     2021   0:00 [nfsd]
+root      1388  0.0  0.0      0     0 ?        S     2021   0:00 [nfsd]
+root      1389  0.0  0.0      0     0 ?        S     2021   0:00 [nfsd]
+root      1390  0.0  0.0      0     0 ?        S     2021   0:00 [nfsd]
+root      1391  0.0  0.0      0     0 ?        S     2021   0:00 [nfsd]
+root      1522  0.0  0.8 1175380 529748 ?      Sl    2021 303:07 /usr/bin/python2 -s /usr/bin/fail2ban-server -s /var/run/fail2ban/fail2ban.sock -p /var/run/fail2ban/fail2ban.pid -x -b
+root      1539  0.0  0.0   4300  1136 ?        S     2021  30:12 /usr/sbin/3dm2
+root      2143  0.0  0.0 137964   608 ?        Ss    2021   0:21 SCREEN -S siwa
+root      2144  0.0  0.0 118568  2416 pts/0    Ss+   2021   0:00 /bin/bash
+root      2757  0.0  0.0  91672   232 ?        Ss    2021  10:54 /usr/libexec/postfix/master -w
+postfix   2762  0.0  0.0  94036   524 ?        S     2021   4:29 qmgr -l -t unix -u
+root      3089  0.0  0.0      0     0 ?        S<   Jan11   0:02 [kworker/1:2H]
+root      3442  0.0  0.0      0     0 ?        S    11:05   0:00 [kworker/5:2]
+root      3853  0.0  0.0      0     0 ?        S<   Jan12   0:00 [kworker/0:2H]
+apache    3944  0.0  0.0 266400  9096 ?        S    Feb02   0:00 /usr/sbin/httpd -DFOREGROUND
+apache    4118  0.0  0.0 318264 11496 ?        S     2021   3:00 php-fpm: pool www
+apache    4119  0.0  0.0 318264 11436 ?        S     2021   3:00 php-fpm: pool www
+apache    4248  0.0  0.0 318264 11496 ?        S     2021   3:01 php-fpm: pool www
+apache    4249  0.0  0.0 318264 11504 ?        S     2021   2:58 php-fpm: pool www
+apache    4250  0.0  0.0 318264 11508 ?        S     2021   2:59 php-fpm: pool www
+apache    4252  0.0  0.0 318264 11556 ?        S     2021   3:00 php-fpm: pool www
+apache    4254  0.0  0.0 318264 11456 ?        S     2021   2:59 php-fpm: pool www
+apache    4501  0.0  0.0 318264 11500 ?        S     2021   3:00 php-fpm: pool www
+apache    4502  0.0  0.0 318264 11512 ?        S     2021   3:00 php-fpm: pool www
+apache    4503  0.0  0.0 318264 11524 ?        S     2021   2:59 php-fpm: pool www
+apache    4504  0.0  0.0 318264 11460 ?        S     2021   2:59 php-fpm: pool www
+apache    4506  0.0  0.0 318264 11508 ?        S     2021   2:59 php-fpm: pool www
+root      4563  0.0  0.0      0     0 ?        S    14:14   0:00 [kworker/1:0]
+andrea.+  4784  0.0  0.0 138000   516 ?        Ss    2021   0:00 SCREEN
+andrea.+  4785  0.0  0.0 121464   432 pts/4    Ss+   2021   0:00 /bin/bash
+apache    4808  0.0  0.0 318264 11528 ?        S     2021   3:00 php-fpm: pool www
+apache    4809  0.0  0.0 318264 11416 ?        S     2021   3:01 php-fpm: pool www
+apache    4810  0.0  0.0 318264 11568 ?        S     2021   3:01 php-fpm: pool www
+apache    4811  0.0  0.0 318264 11460 ?        S     2021   3:02 php-fpm: pool www
+apache    4812  0.0  0.0 318264 11508 ?        S     2021   3:01 php-fpm: pool www
+root      4830  0.0  0.0      0     0 ?        S<   11:44   0:01 [kworker/3:1H]
+andrea.+  4868  0.0  0.0      0     0 ?        Zs    2021   0:00 [ls] <defunct>
+apache    5215  0.0  0.0 318264 11456 ?        S     2021   3:01 php-fpm: pool www
+apache    5216  0.0  0.0 319320 12856 ?        S     2021   2:58 php-fpm: pool www
+apache    5217  0.0  0.0 318264 11500 ?        S     2021   3:00 php-fpm: pool www
+apache    5218  0.0  0.0 318264 11564 ?        S     2021   2:58 php-fpm: pool www
+apache    5219  0.0  0.0 318264 11508 ?        S     2021   3:00 php-fpm: pool www
+root      5222  0.0  0.0      0     0 ?        S<    2021   0:22 [kworker/2:1H]
+apache    5706  0.0  0.0 318264 11488 ?        S     2021   3:03 php-fpm: pool www
+apache    5707  0.0  0.0 318264 11508 ?        S     2021   3:01 php-fpm: pool www
+apache    5708  0.0  0.0 318264 11460 ?        S     2021   3:01 php-fpm: pool www
+apache    5709  0.0  0.0 318264 11496 ?        S     2021   3:00 php-fpm: pool www
+apache    5710  0.0  0.0 318264 11500 ?        S     2021   3:01 php-fpm: pool www
+root      6278  0.0  0.0      0     0 ?        S<    2021   0:03 [kworker/6:2H]
+apache    6291  0.0  0.0 318264 11456 ?        S     2021   3:02 php-fpm: pool www
+apache    6292  0.0  0.0 318264 11508 ?        S     2021   3:00 php-fpm: pool www
+apache    6293  0.0  0.0 318264 11456 ?        S     2021   3:00 php-fpm: pool www
+apache    6295  0.0  0.0 319320 13188 ?        S     2021   3:02 php-fpm: pool www
+apache    6297  0.0  0.0 318264 11464 ?        S     2021   2:59 php-fpm: pool www
+apache    6802  0.0  0.0 318264 11492 ?        S     2021   2:59 php-fpm: pool www
+apache    6804  0.0  0.0 318264 11460 ?        S     2021   3:00 php-fpm: pool www
+apache    6805  0.0  0.0 318264 11520 ?        S     2021   3:02 php-fpm: pool www
+apache    6903  0.0  0.0 263932  4224 ?        S    Jan30   0:06 /usr/sbin/httpd -DFOREGROUND
+apache    6905  0.0  0.0 266368  9092 ?        S    Jan30   0:01 /usr/sbin/httpd -DFOREGROUND
+root      7301  0.0  0.0      0     0 ?        S    13:40   0:00 [kworker/4:0]
+root      7382  0.0  0.0      0     0 ?        S    Jan27   1:17 [kworker/u18:0]
+mysql     7741  0.0  0.0 115156     8 ?        Ss    2021   0:00 /bin/sh /usr/bin/mysqld_safe --basedir=/usr
+mysql     8425  0.2  7.9 20009012 5199076 ?    Sl    2021 1465:37 /usr/libexec/mysqld --basedir=/usr --datadir=/opt/data --plugin-dir=/usr/lib64/mysql/plugin --log-error=/var/log/mariadb/mariadb.log --pid-file=/var/run/mariadb/mariadb.pid --socket=/var/lib/mysql/mysql.sock
+root     10989  0.0  0.0      0     0 ?        S    13:44   0:00 [kworker/7:1]
+root     11107  0.0  0.0 152024  5364 ?        Ss   Feb01   0:00 sshd: calabel1 [priv]
+calabel1 11119  0.0  0.0 152024  2488 ?        S    Feb01   0:02 sshd: calabel1@pts/1
+calabel1 11120  0.0  0.0 122784  3524 pts/1    Ss   Feb01   0:00 -bash
+root     11788  0.0  0.0      0     0 ?        S    03:44   0:00 [kworker/4:2]
+calabel1 11849  0.0  0.0 137832  1192 pts/1    S+   Feb01   0:02 screen -r 24
+root     12271  0.0  0.0      0     0 ?        S<    2021   0:07 [kworker/4:1H]
+root     13904  0.0  0.0      0     0 ?        S    13:10   0:00 [kworker/5:0]
+heloise+ 14015  0.0  0.0 137964   496 ?        Ss    2021   0:00 SCREEN
+heloise+ 14016  0.0  0.0 121848   780 pts/6    Ss+   2021   0:00 /bin/bash
+root     14296  0.0  0.0 152024  5428 ?        Ss   14:25   0:00 sshd: omreeg [priv]
+omreeg   14336  0.0  0.0 152024  2372 ?        S    14:25   0:00 sshd: omreeg@pts/5
+omreeg   14337  0.0  0.0 122784  3572 pts/5    Ss   14:25   0:00 -bash
+root     14944  0.0  0.0      0     0 ?        S    14:26   0:00 [kworker/6:2]
+postfix  15988  0.0  0.0  93876  4008 ?        S    14:27   0:00 pickup -l -t unix -u
+apache   17225  0.0  0.0 266368  9092 ?        S    Jan30   0:01 /usr/sbin/httpd -DFOREGROUND
+apache   17226  0.0  0.0 266368  9092 ?        S    Jan30   0:01 /usr/sbin/httpd -DFOREGROUND
+root     17252  0.0  0.0      0     0 ?        S    Feb01   0:00 [kworker/u18:1]
+kkeller  17290  0.0  0.0 138132  1244 ?        Ss    2021   0:00 SCREEN -S du
+kkeller  17291  0.0  0.0 122540  2892 pts/10   Ss+   2021   0:00 /bin/bash
+root     17405  0.0  0.0      0     0 ?        S    14:29   0:00 [kworker/u17:2]
+root     17779  0.0  0.0      0     0 ?        S    14:29   0:00 [kworker/1:1]
+root     18114  0.0  0.0      0     0 ?        S    Feb03   0:00 [kworker/2:2]
+root     18209  0.0  0.0      0     0 ?        S    09:05   0:00 [kworker/u17:1]
+root     18296  0.0  0.0      0     0 ?        S    14:30   0:00 [kworker/7:2]
+root     18551  0.0  0.0      0     0 ?        S<    2021   0:01 [kworker/5:1H]
+omreeg   19066  1.0  0.0 706948 34632 pts/5    Sl   14:30   0:00 npm start
+omreeg   19085  0.7  0.0 639440 31408 pts/5    Sl   14:30   0:00 node ./bin/www
+root     19389  0.0  0.0      0     0 ?        S    14:31   0:00 [kworker/6:1]
+omreeg   20071  0.0  0.0 157144  1844 pts/5    R+   14:32   0:00 ps aux
+root     20607  0.0  0.0      0     0 ?        S    Jan28   0:07 [kworker/2:0]
+root     23395  0.0  0.0      0     0 ?        S    Feb02   0:01 [kworker/u16:1]
+root     24007  0.0  0.0 482204  1676 ?        Ssl   2021  18:34 /usr/sbin/automount --pid-file /run/autofs.pid
+root     24028  0.0  0.0      0     0 ?        S<    2021   0:00 [nfsiod]
+apache   24165  0.0  0.0 266264  8576 ?        S    13:59   0:00 /usr/sbin/httpd -DFOREGROUND
+root     24433  0.0  0.0      0     0 ?        S    14:00   0:00 [kworker/0:2]
+calabel1 24483  0.0  0.0 137964  1364 ?        Ss   Jan26   0:00 SCREEN
+calabel1 24484  0.0  0.0 121676  2212 pts/7    Ss+  Jan26   0:00 /bin/bash
+calabel1 25227  0.0  0.0 137964  1248 ?        Ss   Jan26   0:00 SCREEN
+calabel1 25228  0.0  0.0 121568  1896 pts/3    Ss+  Jan26   0:00 /bin/bash
+calabel1 25491  0.0  0.0 137964  1252 ?        Ss   Jan26   0:00 SCREEN
+calabel1 25492  0.0  0.0 121564  1896 pts/8    Ss+  Jan26   0:00 /bin/bash
+calabel1 25793  0.0  0.0 137964  1340 ?        Ss   Jan26   0:00 SCREEN
+calabel1 25794  0.0  0.0 121564  2124 pts/9    Ss+  Jan26   0:00 /bin/bash
+calabel1 25967  0.0  0.0 137964  1352 ?        Ss   Jan26   0:00 SCREEN
+calabel1 25968  0.0  0.0 121564  1892 pts/11   Ss+  Jan26   0:00 /bin/bash
+kkeller  26034  0.0  0.0 327292   172 ?        Ssl   2021  13:43 /usr/bin/memcached -p 11211 -l 127.0.0.1 -m 512 -c 128 -d
+kkeller  26044  0.0  3.9 2626160 2617376 ?     S     2021   3:38 /usr2/people/gtl/bin/blat64/gfServer -minMatch=2 -log=/var/log/gfServer/gfServer.1271.log -trans start localhost 1271 /opt/apache/cvs/Genomics/data/gfServer/genomes.1.fna.2bit
+kkeller  26048  0.0  4.0 2694092 2686360 ?     S     2021   3:34 /usr2/people/gtl/bin/blat64/gfServer -minMatch=2 -log=/var/log/gfServer/gfServer.1272.log -trans start localhost 1272 /opt/apache/cvs/Genomics/data/gfServer/genomes.2.fna.2bit
+kkeller  26052  0.0  3.4 2672692 2260248 ?     S     2021   4:32 /usr2/people/gtl/bin/blat64/gfServer -minMatch=2 -log=/var/log/gfServer/gfServer.1273.log -trans start localhost 1273 /opt/apache/cvs/Genomics/data/gfServer/genomes.3.fna.2bit
+kkeller  26056  0.0  4.0 2683380 2674888 ?     S     2021   3:33 /usr2/people/gtl/bin/blat64/gfServer -minMatch=2 -log=/var/log/gfServer/gfServer.1274.log -trans start localhost 1274 /opt/apache/cvs/Genomics/data/gfServer/genomes.4.fna.2bit
+kkeller  26060  0.0  3.8 2606060 2557352 ?     S     2021   3:40 /usr2/people/gtl/bin/blat64/gfServer -minMatch=2 -log=/var/log/gfServer/gfServer.1275.log -trans start localhost 1275 /opt/apache/cvs/Genomics/data/gfServer/genomes.5.fna.2bit
+kkeller  26064  0.0  4.1 2770176 2761272 ?     S     2021   3:37 /usr2/people/gtl/bin/blat64/gfServer -minMatch=2 -log=/var/log/gfServer/gfServer.1276.log -trans start localhost 1276 /opt/apache/cvs/Genomics/data/gfServer/genomes.6.fna.2bit
+apache   26738  0.0  0.0 266264  8576 ?        S    14:02   0:00 /usr/sbin/httpd -DFOREGROUND
+root     27008  0.0  0.0      0     0 ?        S    12:10   0:00 [kworker/u17:0]
+apache   27251  0.0  0.0 266400  9008 ?        S    01:24   0:00 /usr/sbin/httpd -DFOREGROUND
+root     27287  0.0  0.0      0     0 ?        S    Feb01   0:16 [kworker/0:1]
+apache   27457  0.0  0.0 266400  9004 ?        S    01:25   0:00 /usr/sbin/httpd -DFOREGROUND
+root     28357  0.0  0.0      0     0 ?        S    Jan18   0:38 [kworker/1:2]
+root     28822  0.0  0.0      0     0 ?        S    14:05   0:00 [kworker/3:0]
+apache   28970  0.0  0.0 266400  9092 ?        S    Feb01   0:00 /usr/sbin/httpd -DFOREGROUND
+root     28975  0.0  0.0      0     0 ?        S<   Feb01   0:03 [kworker/3:2H]
+root     29329  0.0  0.0 152016  5436 ?        Ss   10:33   0:00 sshd: mprice [priv]
+mprice   29332  0.0  0.0 152016  2352 ?        S    10:33   0:00 sshd: mprice@pts/12
+mprice   29333  0.0  0.0 122764  3312 pts/12   Ss+  10:33   0:00 -bash
+apache   29943  0.0  0.0 266400  9092 ?        S    Feb01   0:00 /usr/sbin/httpd -DFOREGROUND
+root     30658  0.0  0.0      0     0 ?        S    14:07   0:00 [kworker/6:0]
+polkitd  31428  0.0  0.0 612212  8176 ?        Ssl  Jan26   0:13 /usr/lib/polkit-1/polkitd --no-debug
+root     31441  0.0  0.0 569128 16716 ?        Ssl  Jan26   1:15 /usr/bin/python -Es /usr/sbin/tuned -l -P
+root     31808  0.0  0.0      0     0 ?        S    Jan31   0:02 [kworker/u16:2]
+root     32413  0.0  0.0      0     0 ?        S    Jan27   0:09 [kworker/3:1]
