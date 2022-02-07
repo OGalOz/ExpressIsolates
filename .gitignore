@@ -10,4 +10,6 @@ tmp/*
 *.swp
 nohup.out
 py_src/check_if_node_runs.py
+ps.sh
+ps.txt
 
